@@ -20,24 +20,25 @@
     <div class="row">
         <div class="col-sm-9">
         <?php
-          echo "<h2>'$title'</h2>";
+          echo "<h2>$title</h2>";
         ?>
         </div>
         <div class="col-sm-1">
-        <button type="button" class="btn btn-light">Back</button>
+        
+        <a class="btn btn-light" href="index_controll.php?act=about" role="button">Back</a>
         </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-sm-4">
         <?php
-        echo "<td><img src='$img' width='237' height='237' style='border: solid;width: 200px;height: 200px;margin-left: 237px;'></td> ";
+        echo "<td><img src='$img' width='150' height='100' style='width: 200px;height: 200px;margin-left: 237px;'></td> ";
         ?>
         
       </div>
       <div class="col-sm-6">
         <?php
-        echo "<h3 style='border: solid;width: 700px;height: 500px;'>$descr</h3>";
+        echo "<h3 style='width: 700px;height: 500px;'>$descr</h3>";
         ?>
 
       </div>

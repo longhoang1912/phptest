@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-    <!-- Footer -->
-    <footer class="page-footer font-small blue">
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
-
-    </footer>
-    <!-- Footer -->
-
-</body>
-
-</html>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "test";
+$conn = new mysqli($servername, $username, $password, $dbname);
+$sql="SELECT COUNT(*) FROM mydatabase";
+$result = mysqli_query($conn, $sql);
+$count = mysqli_fetch_assoc($result)['COUNT(*)'];
+?>
+<form method="POST">
+<select id="status" name="numpage" class="custom-select" style="
+    width: 5%;
+">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value=<?php echo "'$count'";?>>show all</option>
+                      </select>
+  <br><br>
+  <input type="submit" value="SHOW ITEM" name='page'>
+</form>

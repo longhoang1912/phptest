@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule "index/manage" "index_controll.php?act=manage"

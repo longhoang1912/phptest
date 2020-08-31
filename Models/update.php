@@ -8,8 +8,8 @@ if(isset($_POST['submit'])){
     }
     else{
         move_uploaded_file($_FILES['upload']['tmp_name'],
-        '/opt/lampp/temp/phpAVBLfp' .$_FILES['upload']['name']);
-        $img = '/opt/lampp/temp/'.$_FILES['upload']['name'];
+        'pictures/' .$_FILES['upload']['name']);
+        $img = 'pictures/'.$_FILES['upload']['name'];
     }
 }
 if (isset($_POST['submit'])) {

@@ -9,6 +9,9 @@ if(isset($_GET['act'])){
         case 'about':
             include "../views/body.php";
         break;
+        case 'add':
+            include "../Models/add.php";
+        break;
         default:
             include "../views/body.php";
         break;

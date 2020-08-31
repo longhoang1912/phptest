@@ -20,58 +20,68 @@ $dt = new database;
             <h1>MANAGE</h1>
         </div>
         <div class="col-sm-10">
-            <form action="http://localhost/MVCphp/Models/add.php">
-                <input type="submit" value="New" class="btn btn-primary" style="
-        margin-top: 1%;
-        width: 80px;
-        margin-left: 88%;
-    " "/>
-    </form>
+            <a class="btn btn-primary" href="index_controll.php?act=add" role="button" style="
+    margin-left: 88%;
+">NEW</a>
         </div>
 
     </div>
-    
-    
-   
+
+
+
     <table class=" table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Thumb</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $dt->select("SELECT * FROM mydatabase");
-                        $i = 0;
-                        while ($r=$dt->fetch()) {
-                            $i++;
-                            $id = $r['id'];
-                            $title = $r['title'];
-                            $descr = $r['descr'];
-                            $img = $r['img'];
-                            $stt = $r['stt'];
-                            //  $create_at = $row['create_at'];
-                            //  $update_at = $row['update_at']
-                            echo "<tr>";
-                            echo "<td>$id</td>";
-                            echo "<td><img src='$img' class='img-fluid'></td> ";
-                            echo "<td>$title</td> ";
-                            echo "<td>$stt</td> ";
-                            echo "<td><a href='delete.php?id=$id'>Show</a>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Thumb</th>
+                <th scope="col">Title</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $numpage = 0;
+            if(isset($_POST['page'])){
+                $numpage = $_POST['numpage'] - 1;
+            }
+            // if(isset($_POST['page'])){
+            //     $numpage = $_POST['status'];
+            $dt->select("SELECT * FROM mydatabase");
+            $i = 0;
+            while ($r = $dt->fetch()) {
+                $i++;
+                $id = $r['id'];
+                $title = $r['title'];
+                $descr = $r['descr'];
+                $img = $r['img'];
+                $stt = $r['stt'];
+                //  $create_at = $row['create_at'];
+                //  $update_at = $row['update_at']
+                echo "<tr>";
+                echo "<td>$id</td>";
+                echo "<td><img src='$img' class='img-fluid' style='
+                width: 150px;
+                height: 100px;
+            '></td> ";
+                echo "<td>$title</td> ";
+                echo "<td>$stt</td> ";
+                echo "<td><a href='index_controll.php?titleid=$id'>Show</a>
                         | <a href='index_controll.php?&updateid=$id'>Edit</a> | 
                                   <a href='index_controll.php?deleteid=$id'>Delete</a><td>";
-                            echo "</tr>";
-                        }
-                    
-                    ?>
-                </tbody>
-                </table>
+                echo "</tr>";
+                if($i > $numpage){
+                break;
+                }
+            }
+            
+            ?>
+        </tbody>
+    </table>
 
 
 </body>
-
+<?php
+include "footer.php";
+?>
 </html>

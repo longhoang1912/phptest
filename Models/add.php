@@ -11,15 +11,14 @@ if(isset($_POST['submit'])){
         }
         else{
             move_uploaded_file($_FILES['upload']['tmp_name'],
-            '/opt/lampp/temp/phpAVBLfp' .$_FILES['upload']['name']);
-            $img = '/opt/lampp/temp/'.$_FILES['upload']['name'];
+            'upload/'.$_FILES['upload']['name']);
+            $img = 'upload/'.$_FILES['upload']['name'];
         }
 
     $title = $_POST['title'];
     $des = $_POST['des'];
     $stt = $_POST['status'];
     $time = date("Y/m/d");
-    echo "<h1>'$id'</h1>";
     $dt->command("INSERT INTO mydatabase (title, descr, img, stt, create_at)
     VALUES ('$title', '$des',  '$img','$stt', '$time')");
 
