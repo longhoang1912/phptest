@@ -2,18 +2,19 @@
 include "getdata.php";
 $dt = new database;
 include "../views/addnew.php";
-if(isset($_POST['submit'])){
-    if($_FILES['upload']['error'] > 0){
+if (isset($_POST['submit'])) {
+    if ($_FILES['upload']['error'] > 0) {
         echo "<br>Co loi trong viec upload file";
-    }
-    else{
-        move_uploaded_file($_FILES['upload']['tmp_name'],
-        'pictures/' .$_FILES['upload']['name']);
-        $img = 'pictures/'.$_FILES['upload']['name'];
+    } else {
+        move_uploaded_file(
+            $_FILES['upload']['tmp_name'],
+            'pictures/' . $_FILES['upload']['name']
+        );
+        $img = 'pictures/' . $_FILES['upload']['name'];
     }
 }
 if (isset($_POST['submit'])) {
-    $id = $_GET['updateid'];    
+    $id = $_GET['updateid'];
     $title = $_POST['title'];
     $des = $_POST['des'];
     $stt = $_POST['status'];
@@ -21,7 +22,7 @@ if (isset($_POST['submit'])) {
     $dt->command("UPDATE mydatabase SET title='$title',descr='$des',
                     img='$img',stt='$stt',
                     update_at='$time' WHERE id='$id'");
-    header('location:../controllers/index_controll.php?act=manage');
+    header('location:../controllers/index_controll.php?act=manage&page=1&item=10');
 }
 ?>
 

@@ -41,40 +41,45 @@ $dt = new database;
         </thead>
         <tbody>
             <?php
-            $numpage = 0;
+            $item = $_GET['item'];
             if(isset($_POST['page'])){
-                $numpage = $_POST['numpage'] - 1;
+                $item = $_POST['numpage'];
             }
-            // if(isset($_POST['page'])){
-            //     $numpage = $_POST['status'];
-            $dt->select("SELECT * FROM mydatabase");
-            $i = 0;
-            while ($r = $dt->fetch()) {
-                $i++;
-                $id = $r['id'];
-                $title = $r['title'];
-                $descr = $r['descr'];
-                $img = $r['img'];
-                $stt = $r['stt'];
-                //  $create_at = $row['create_at'];
-                //  $update_at = $row['update_at']
-                echo "<tr>";
-                echo "<td>$id</td>";
-                echo "<td><img src='$img' class='img-fluid' style='
-                width: 150px;
-                height: 100px;
-            '></td> ";
-                echo "<td>$title</td> ";
-                echo "<td>$stt</td> ";
-                echo "<td><a href='index_controll.php?titleid=$id'>Show</a>
-                        | <a href='index_controll.php?&updateid=$id'>Edit</a> | 
-                                  <a href='index_controll.php?deleteid=$id'>Delete</a><td>";
-                echo "</tr>";
-                if($i > $numpage){
-                break;
-                }
-            }
+            // $item = $plus + $_GET['item'] -     1;
+            $dt->select("SELECT COUNT(*) FROM mydatabase");
+            $row = $dt->fetch();
+            $tong = $row['COUNT(*)'];
+            // xac dinh so trang
+            $sotrang = ceil($tong/$item);
+            //xac dinh so trang hien tai!!
             
+            if(isset($_GET['page']) >= 1 && $_GET['page'] <= $sotrang){
+                $page = $_GET['page'];
+            }
+            else{
+                $page=1;
+            }
+            $start = ($page-1)*$item;
+            $dt -> select("SELECT * FROM mydatabase LIMIT $start, $item");
+            while($r = $dt->fetch()){
+            $id = $r['id'];
+                    $title = $r['title'];
+                    $descr = $r['descr'];
+                    $img = $r['img'];
+                    $stt = $r['stt'];
+                    echo "<tr>";
+                    echo "<td>$id</td>";
+                    echo "<td><img src='$img' class='img-fluid' style='
+                    width: 150px;
+                    height: 100px;
+                '></td> ";
+                    echo "<td>$title</td> ";
+                    echo "<td>$stt</td> ";
+                    echo "<td><a href='index_controll.php?titleid=$id'>Show</a>
+                            | <a href='index_controll.php?&updateid=$id'>Edit</a> | 
+                                        <a href='index_controll.php?deleteid=$id'>Delete</a><td>";
+                    echo "</tr>";
+            }
             ?>
         </tbody>
     </table>
@@ -83,5 +88,30 @@ $dt = new database;
 </body>
 <?php
 include "footer.php";
+echo "<center><ul class='nav' style='
+margin-left: 270px;
+'>";
+//nut prev
+if($page > 1){
+    $prev = $page - 1;
+    echo "<li><a href='index_controll.php?act=manage&page=$prev&item=$item'>Prev</a></li>";
+    
+}
+// nut so
+for($i=1;$i<$sotrang;$i++){
+    if($page != $i){
+        echo "<li><a href='index_controll.php?act=manage&page=$i&item=$item'>$i</a></li>";
+    }
+    else{
+        echo "<li class='current'>$i</li>";
+    }
+}
+// nut next
+if($page < $sotrang){
+    $next = $page +1;
+    echo "<li><a href='index_controll.php?act=manage&page=$next&item=$item'>Next</a></li>";
+    
+}
+echo "</ul></center>";
 ?>
 </html>

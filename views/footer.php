@@ -1,22 +1,23 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "test";
-$conn = new mysqli($servername, $username, $password, $dbname);
-$sql="SELECT COUNT(*) FROM mydatabase";
-$result = mysqli_query($conn, $sql);
-$count = mysqli_fetch_assoc($result)['COUNT(*)'];
+  // include "../Models/getdata.php";
+  // $dt = new database;
+  $dt->select("SELECT COUNT(*) FROM mydatabase");
+  $row = $dt->fetch();
+  $sumitems = $row['COUNT(*)'];
 ?>
-<form method="POST">
+<div class="row">
+  <div class="col-sm-3">
+  <form method="POST">
 <select id="status" name="numpage" class="custom-select" style="
-    width: 5%;
+    width: 20%;
 ">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
-                        <option value=<?php echo "'$count'";?>>show all</option>
+                        <option value=<?php echo "'$sumitems'";?>>show all</option>
                       </select>
   <br><br>
   <input type="submit" value="SHOW ITEM" name='page'>
+  </div>
+
 </form>

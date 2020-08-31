@@ -22,6 +22,6 @@ if(isset($_POST['submit'])){
     $dt->command("INSERT INTO mydatabase (title, descr, img, stt, create_at)
     VALUES ('$title', '$des',  '$img','$stt', '$time')");
 
-    header('location:../controllers/index_controll.php?act=manage');
+header('location:../controllers/index_controll.php?act=manage&page=1&item=10');
 }
 ?>

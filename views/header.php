@@ -20,7 +20,7 @@
               <a class="nav-link" href="index_controll.php?act=about">HOME <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index_controll.php?act=manage">MANAGE</a>
+              <a class="nav-link" href= "index_controll.php?act=manage&page=1&item=10">MANAGE</a>
             </li>
           </ul>
         </div>
